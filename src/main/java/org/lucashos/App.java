@@ -1,8 +1,10 @@
 package org.lucashos;
 
-import org.lucashos.gens.Cromossomo;
-import org.lucashos.utils.Mutacao;
-import org.lucashos.utils.Roleta;
+import org.lucashos.gens.Chromosome;
+import org.lucashos.utils.Crossing;
+import org.lucashos.utils.Mutation;
+import org.lucashos.utils.Roulette;
+import org.lucashos.utils.Selection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +15,29 @@ import java.util.List;
  */
 public class App 
 {
+
     public static void main( String[] args )
     {
-        List<Cromossomo> cromos = prepare(5);
+        int populationLength = 50;
+        List<Chromosome> chromosomes = prepare(populationLength);
 
+        int cicles = 0;
+        while (cicles++ < 20000 && Roulette.getMaximumValue(chromosomes) < 51150) {
+            Selection.noPainNoGain(Crossing.cross(Mutation.evolve(chromosomes)));
+        }
+
+        System.out.println(chromosomes);
+        System.out.println("Population size: " + chromosomes.size());
+
+        System.out.println("\nEnded in " + cicles + "cicles.");
+        System.out.println("Final count: " + Roulette.getMaximumValue(chromosomes));
     }
 
-    private static List<Cromossomo> prepare (int n) {
-        List<Cromossomo> cromos = new ArrayList<>();
+    private static List<Chromosome> prepare (int n) {
+        List<Chromosome> chromosomes = new ArrayList<>();
         while(n-- > 0) {
-            cromos.add(new Cromossomo());
+            chromosomes.add(new Chromosome());
         }
-        return cromos;
+        return chromosomes;
     }
 }

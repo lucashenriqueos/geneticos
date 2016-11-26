@@ -5,16 +5,16 @@ import java.util.Random;
 /**
  * Created by lucas on 26/11/16.
  */
-public class Cromossomo {
+public class Chromosome implements Comparable<Chromosome>{
     private Integer value;
+    private Integer domain = 1023;
 
-
-    public Cromossomo() {
+    public Chromosome() {
         Random random = new Random();
-        this.value = random.nextInt(1023);
+        this.value = random.nextInt(domain);
     }
 
-    public Cromossomo(Integer value) {
+    public Chromosome(Integer value) {
         this.value = value;
     }
 
@@ -43,6 +43,11 @@ public class Cromossomo {
 
     @Override
     public String toString() {
-        return "Cromossomo: " + getValue() + "\nBytes: " + toByteString();
+        return "Chromosome: " + getValue() + "\nBytes: " + toByteString();
+    }
+
+    @Override
+    public int compareTo(Chromosome o) {
+        return getValue().compareTo(o.getValue());
     }
 }
