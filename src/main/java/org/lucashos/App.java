@@ -18,7 +18,7 @@ public class App
 
     public static void main( String[] args )
     {
-        int populationLength = 50;
+        int populationLength = 500;
         List<Chromosome> chromosomes = prepare(populationLength);
 
         int cicles = 0;
@@ -29,7 +29,7 @@ public class App
         System.out.println(chromosomes);
         System.out.println("Population size: " + chromosomes.size());
 
-        System.out.println("\nEnded in " + cicles + "cicles.");
+        System.out.println("\nEnded in " + cicles + " cicles.");
         System.out.println("Final count: " + Roulette.getMaximumValue(chromosomes));
     }
 
